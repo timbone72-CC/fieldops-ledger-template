@@ -32,7 +32,7 @@ export default function SettingsPanel() {
   async function updateApp() {
     if (!navigator.onLine) {
       window.alert(
-        "You appear to be offline. Do not update FieldLedger while offline. Reconnect to the internet, open the app once, then use Update App."
+        "You appear to be offline. Do not update FieldOps Ledger while offline. Reconnect to the internet, open the app once, then use Update App."
       );
       return;
     }
@@ -114,9 +114,9 @@ export default function SettingsPanel() {
       </p>
 
       <div className="helper">
-        <strong>FieldLedger Basics:</strong>
+        <strong>FieldOps Ledger Basics:</strong>
         <br />
-        FieldLedger saves data in this browser on this device. Your phone and computer do not automatically
+        FieldOps Ledger saves data in this browser on this device. Your phone and computer do not automatically
         share data. Use JSON Backup before clearing browser data, switching devices, or importing a replacement
         backup. Tax and mileage estimates are for planning only.
       </div>
@@ -138,7 +138,7 @@ export default function SettingsPanel() {
       <div className="helper">
         <strong>Update App:</strong>
         <br />
-        Reload FieldLedger and refresh the app cache. Use this only while online. Your saved records stay on this device.
+        Reload FieldOps Ledger and refresh the app cache. Use this only while online. Your saved records stay on this device.
       </div>
 
       <button type="button" onClick={updateApp}>

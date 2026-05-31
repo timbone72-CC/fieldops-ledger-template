@@ -17,7 +17,7 @@ export default function ClearPayPeriodButton({ onPayPeriodCleared }) {
     const cleared = clearActivePayPeriod();
 
     if (!cleared) {
-      window.alert("FieldLedger could not clear this pay period. Your data should still be intact.");
+      window.alert("FieldOps Ledger could not clear this pay period. Your data should still be intact.");
       return;
     }
 
@@ -31,7 +31,7 @@ export default function ClearPayPeriodButton({ onPayPeriodCleared }) {
       <summary>Clear Pay Period</summary>
 
       <p className="helper">
-        This clears the current pay period from this browser only. FieldLedger
+        This clears the current pay period from this browser only. FieldOps Ledger
         downloads a JSON backup first, then asks for confirmation before clearing.
       </p>
 
