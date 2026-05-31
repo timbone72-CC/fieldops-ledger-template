@@ -2,18 +2,15 @@
 
 ## 1. Current Head
 
-b1cf460 Update checkpoint after template sanitization
+e9ce19b Add public FieldOps Ledger README
 
 ## 2. Recent Commits
 
+- 4234c19 Update checkpoint after GitHub remote setup
+- b1cf460 Update checkpoint after template sanitization
 - fdd9e1e Update export helper identity comment
 - 8c1cb92 Sanitize remaining demo identity strings
 - fac59ae Generalize settings and clear pay period wording
-- fbd8ec7 Sanitize demo default suggestions
-- cef513f Sanitize CSV export demo identity
-- 9748743 Generalize visible UI wording
-- ee639d5 Convert app identity to FieldOps Ledger
-- 1556aee Create FieldOps Ledger template baseline
 
 ## 3. Repo State
 
@@ -21,7 +18,7 @@ b1cf460 Update checkpoint after template sanitization
 - Branch: `main`
 - Remote: `origin` → `https://github.com/timbone72-CC/fieldops-ledger-template.git`
 - Pushed to `origin/main`
-- Current safe HEAD: `b1cf460 Update checkpoint after template sanitization`
+- Current safe HEAD: `e9ce19b Add public FieldOps Ledger README`
 - Working tree was clean before this checkpoint edit.
 - Blockers: none known.
 
