@@ -4,7 +4,7 @@
  * =========================================================
  *
  * 01.01 Purpose:
- * Posts a FieldLedger CSV export to the trusted Apps Script web endpoint.
+ * Posts a FieldOps Ledger CSV export to the trusted Apps Script web endpoint.
  *
  * 01.02 Safety:
  * This helper does not store secrets.
