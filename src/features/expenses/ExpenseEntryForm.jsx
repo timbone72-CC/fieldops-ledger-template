@@ -183,7 +183,7 @@ export default function ExpenseEntryForm({ onExpenseSaved }) {
       return;
     }
 
-    let nextReceiptPhotos = [];
+    let nextReceiptPhotos;
 
     try {
       nextReceiptPhotos = await Promise.all(

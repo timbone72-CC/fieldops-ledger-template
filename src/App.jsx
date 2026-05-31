@@ -30,7 +30,7 @@ export default function App() {
 
   useEffect(() => {
     function handleStorageRecovery(event) {
-      setStorageRecoveryMessage(event.detail?.message || "FieldLedger recovered from a storage problem.");
+      setStorageRecoveryMessage(event.detail?.message || "FieldOps Ledger recovered from a storage problem.");
     }
 
     window.addEventListener("fieldledger:storage-recovery", handleStorageRecovery);
@@ -47,7 +47,7 @@ export default function App() {
   return (
     <main className="app-shell">
       <section className="hero-card">
-        <p className="eyebrow">FieldLedger</p>
+        <p className="eyebrow">FieldOps Ledger</p>
         <h1>1099 field ticket, receipt, and pay-period tracker</h1>
         <p className="subtext">
           Capture job tickets and receipts, review the details, calculate pay,
@@ -65,7 +65,7 @@ export default function App() {
         </section>
       )}
 
-      <nav className="tab-bar" aria-label="FieldLedger sections">
+      <nav className="tab-bar" aria-label="FieldOps Ledger sections">
         <button
           type="button"
           className={activeTab === TABS.DASHBOARD ? "active" : ""}
@@ -119,7 +119,7 @@ export default function App() {
           <section className="data-ownership-notice">
             <strong>Data ownership reminder</strong>
             <p>
-              FieldLedger stores records locally on this browser/device. Your phone and
+              FieldOps Ledger stores records locally on this browser/device. Your phone and
               computer do not automatically share data.
             </p>
 
