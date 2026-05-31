@@ -21,17 +21,17 @@ export const EXPENSE_CATEGORIES = [
 ];
 
 export const TIMESHEET_COMPANIES = [
-  "Conoco Phillips",
-  "Exxon Mobile",
-  "Avent Natural Resources",
+  "Demo Field Services",
+  "Sample Repair Co",
+  "Example Inspection Group",
 ];
 
 export const TIMESHEET_RIG_NAMES = [
-  "Scan Vision",
-  "Nabors X20",
-  "Noram 21",
-  "Noram 32",
-  "H&P 615",
+  "Demo Site A",
+  "Sample Unit 12",
+  "Inspection Route 3",
+  "Service Area 4",
+  "Work Zone 5",
 ];
 
 export const TAX_DISCLAIMER =
