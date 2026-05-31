@@ -2,15 +2,15 @@
 
 ## 1. Current Head
 
-e9ce19b Add public FieldOps Ledger README
+dd30420 Fix GitHub Pages base path
 
 ## 2. Recent Commits
 
+- fbdf9af Update checkpoint after public README
+- e9ce19b Add public FieldOps Ledger README
 - 4234c19 Update checkpoint after GitHub remote setup
 - b1cf460 Update checkpoint after template sanitization
 - fdd9e1e Update export helper identity comment
-- 8c1cb92 Sanitize remaining demo identity strings
-- fac59ae Generalize settings and clear pay period wording
 
 ## 3. Repo State
 
@@ -18,7 +18,7 @@ e9ce19b Add public FieldOps Ledger README
 - Branch: `main`
 - Remote: `origin` → `https://github.com/timbone72-CC/fieldops-ledger-template.git`
 - Pushed to `origin/main`
-- Current safe HEAD: `e9ce19b Add public FieldOps Ledger README`
+- Current safe HEAD: `dd30420 Fix GitHub Pages base path`
 - Working tree was clean before this checkpoint edit.
 - Blockers: none known.
 
