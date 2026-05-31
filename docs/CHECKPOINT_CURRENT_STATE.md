@@ -114,3 +114,10 @@ Recommended verification before commit:
 - `git diff --check`
 - `git diff --stat`
 - `git status --short`
+
+## 7. Live GitHub Pages Validation
+
+- Live GitHub Pages URL confirmed working:
+  `https://timbone72-cc.github.io/fieldops-ledger-template/`
+- GitHub Pages source is `main` branch and `/docs` folder.
+- Vite base path is `/fieldops-ledger-template/`.
