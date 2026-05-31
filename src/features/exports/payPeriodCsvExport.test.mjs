@@ -9,7 +9,7 @@ const payPeriod = {
     {
       jobType: "bucking",
       date: "2026-05-02",
-      company: "Legend",
+      company: "Demo Client",
       rigNameOrNumber: "Rig 12",
       fieldTicketNumber: "FT-100",
       hoursWorked: 6,
@@ -19,7 +19,7 @@ const payPeriod = {
     {
       jobType: "torque_turn",
       date: "2026-05-03",
-      company: "Legend",
+      company: "Demo Client",
       rigNameOrNumber: "Rig 14",
       fieldTicketNumber: "FT-200",
       baseJobPay: 1400,
@@ -55,7 +55,7 @@ assert.deepEqual(headerRow, [
 const buckingRow = rows.find((row) => row[3] === "FT-100");
 assert.deepEqual(buckingRow, [
   "2026-05-02",
-  "Legend",
+  "Demo Client",
   "Rig 12",
   "FT-100",
   "",
@@ -67,7 +67,7 @@ assert.deepEqual(buckingRow, [
 const torqueTurnRow = rows.find((row) => row[3] === "FT-200");
 assert.deepEqual(torqueTurnRow, [
   "2026-05-03",
-  "Legend",
+  "Demo Client",
   "Rig 14",
   "FT-200",
   "1400",
