@@ -1,0 +1,152 @@
+# FieldLedger Sheets Script Handoff
+
+## 1. Purpose
+
+This document records the current status of the Google Sheets / Apps Script side of the FieldLedger workflow.
+
+## 2. Current Status
+
+The FieldLedger repo now contains the current Google Apps Script source code.
+
+Current repo evidence:
+
+- docs/FIELDLEDGER_SHEETS_INTEGRATION_CONTRACT.md exists.
+- google-sheets/apps-script/Code.gs exists.
+- Apps Script behavior can now be audited, patched, syntax-checked locally as JavaScript, copied into Google Apps Script, and manually tested in a Sheet copy.
+
+## 3. Current Script Source
+
+The repo-controlled script source is:
+
+google-sheets/apps-script/Code.gs
+
+Google Apps Script remains the runtime.
+
+The repo file is the controlled source for review and patching, but script changes must still be copied into the Google Apps Script editor and saved before they affect the live/test Sheet.
+
+## 4. Current Verified Behavior
+
+Confirmed behavior after script import and recovery hardening:
+
+- CSV import writes FieldLedger CSV rows into RawData.
+- Exported summary rows such as Grand Total are ignored during RawData import.
+- Malformed CSV imports fail before RawData is replaced.
+- RawData replacement snapshots the previous RawData contents into _FieldLedger_RawData_Backup before clearing and writing.
+- If RawData replacement fails during write, the prior RawData contents are restored from backup.
+- Helper sheets can refresh from RawData.
+- Timesheet formulas and validations are repaired only inside the governed rows 12–38.
+- Timesheet total row H39 is governed.
+- Schedule generation skips duplicate pending rows.
+- Calendar sync targets LEG Work Calendar.
+- Calendar sync skips valid already-synced rows.
+- Calendar sync marks rows as Missing calendar event when a stored event ID no longer exists in LEG Work Calendar.
+
+## 5. Current Boundary
+
+FieldLedger app data remains authoritative.
+
+Google Sheets remains a downstream operational/reporting layer.
+
+LEG Work Calendar remains a downstream visualization layer.
+
+Calendar sync must not mutate FieldLedger app source data.
+
+## 6. Local Verification Commands
+
+Before committing Apps Script changes, run:
+
+cp google-sheets/apps-script/Code.gs /tmp/fieldledger-Code-check.js
+node --check /tmp/fieldledger-Code-check.js
+git diff --check
+
+Expected:
+
+- no syntax error
+- no whitespace errors
+
+## 7. Manual Sheet Verification
+
+After copying Code.gs into Google Apps Script and saving it, verify changes in a test Sheet copy before using them in the working Sheet.
+
+Current manual checks:
+
+- Import a valid FieldLedger CSV.
+- Confirm RawData updates.
+- Confirm _FieldLedger_RawData_Backup is created and hidden.
+- Confirm exported Grand Total rows do not break import.
+- Import a malformed CSV and confirm:
+  - import fails safely
+  - RawData remains unchanged
+  - failure message states RawData was not changed
+- Run Timesheet repair and confirm:
+  - formulas are restored only in rows 12–38
+  - H39 is restored as the governed total row
+  - rows 40 and below are not modified
+- Run schedule generation twice and confirm duplicates are skipped.
+- Run calendar sync and confirm already-synced rows do not duplicate events.
+- If testing deleted events, confirm stale event IDs are marked Missing calendar event.
+
+## 8. Schedule Generation Verification Drill
+
+Purpose:
+
+Verify schedule generation is repeatable and does not append duplicate pending calendar rows.
+
+Manual test steps:
+
+1. Use a test Sheet copy.
+2. Confirm ScheduleConfig has the intended governed schedule settings.
+3. Run schedule generation once.
+4. Record the number of rows added to CalendarEvents.
+5. Run schedule generation a second time with the same ScheduleConfig.
+6. Confirm no duplicate rows are appended.
+
+Expected result:
+
+- First run creates the expected pending schedule rows.
+- Second run skips matching existing rows.
+- Duplicate identity is based on event type, title, start date, and end date.
+- CalendarEvents does not gain duplicate pending rows for the same governed event identity.
+
+Failure result:
+
+- If the second run appends duplicate rows, schedule duplicate prevention has failed.
+- Do not sync those duplicate rows to LEG Work Calendar until the duplicate cause is fixed.
+
+## 9. Calendar Sync Reconciliation Verification Drill
+
+Purpose:
+
+Verify calendar sync only creates missing downstream events, skips valid synced rows, and flags stale event IDs.
+
+Manual test steps:
+
+1. Use a test Sheet copy connected to LEG Work Calendar.
+2. Confirm CalendarEvents contains pending rows from schedule generation.
+3. Run calendar sync once.
+4. Confirm pending rows receive calendar event IDs.
+5. Run calendar sync a second time.
+6. Confirm already-synced rows do not create duplicate LEG Work Calendar events.
+7. Delete one synced event from LEG Work Calendar.
+8. Run calendar sync again.
+9. Confirm the deleted event row is marked Missing calendar event instead of silently duplicating or ignoring the missing event.
+
+Expected result:
+
+- First sync creates only missing downstream calendar events.
+- Second sync skips rows with valid existing event IDs.
+- Deleted/stale event IDs are detected and marked Missing calendar event.
+- Calendar sync does not mutate FieldLedger source data.
+- Calendar sync remains downstream-only.
+
+Failure result:
+
+- If duplicate LEG Work Calendar events are created, stop and inspect sync identity handling.
+- If missing events are ignored, stale event recovery has failed.
+- If FieldLedger app data is changed, the downstream-only boundary has been violated.
+
+## 10. Current Decision
+
+Apps Script is now repo-controlled for audit and patching.
+
+Future script changes should be small, contract-first, syntax-checked locally, manually tested in a Sheet copy, committed, pushed, and reflected in CHECKPOINT_CURRENT_STATE.md.
