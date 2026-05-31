@@ -2,15 +2,15 @@
 
 ## 1. Current Head
 
-dd30420 Fix GitHub Pages base path
+edbfea4 Update checkpoint after live Pages validation
 
 ## 2. Recent Commits
 
+- dc15f97 Update checkpoint after Pages base path
+- dd30420 Fix GitHub Pages base path
 - fbdf9af Update checkpoint after public README
 - e9ce19b Add public FieldOps Ledger README
 - 4234c19 Update checkpoint after GitHub remote setup
-- b1cf460 Update checkpoint after template sanitization
-- fdd9e1e Update export helper identity comment
 
 ## 3. Repo State
 
@@ -18,7 +18,7 @@ dd30420 Fix GitHub Pages base path
 - Branch: `main`
 - Remote: `origin` → `https://github.com/timbone72-CC/fieldops-ledger-template.git`
 - Pushed to `origin/main`
-- Current safe HEAD: `dd30420 Fix GitHub Pages base path`
+- Current safe HEAD: `edbfea4 Update checkpoint after live Pages validation`
 - Working tree was clean before this checkpoint edit.
 - Blockers: none known.
 
