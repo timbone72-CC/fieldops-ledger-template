@@ -4,7 +4,7 @@ export default function HelpPanel() {
       <h2>Help & Workflow Guide</h2>
 
       <p>
-        FieldLedger is an offline-first 1099 field-work tracker for jobs,
+        FieldOps Ledger is an offline-first field operations tracker for jobs,
         expenses, mileage, receipts, and pay-period reporting.
       </p>
 
@@ -14,7 +14,7 @@ export default function HelpPanel() {
           <li><a href="#help-getting-started">Getting Started</a></li>
           <li><a href="#help-data-reminder">Important Data Reminder</a></li>
           <li><a href="#help-product-scope">Current Product Scope</a></li>
-          <li><a href="#help-update-app">Keeping FieldLedger Updated</a></li>
+          <li><a href="#help-update-app">Keeping FieldOps Ledger Updated</a></li>
           <li><a href="#help-future-ideas">Future Ideas</a></li>
           <li><a href="#help-feedback">Feedback</a></li>
         </ul>
@@ -35,7 +35,7 @@ export default function HelpPanel() {
         <h3>Important Data Reminder</h3>
 
         <p>
-          FieldLedger stores records locally on this browser/device.
+          FieldOps Ledger stores records locally on this browser/device.
         </p>
 
         <p>
@@ -67,7 +67,7 @@ export default function HelpPanel() {
       </section>
 
       <section id="help-update-app">
-        <h3>Keeping FieldLedger Updated</h3>
+        <h3>Keeping FieldOps Ledger Updated</h3>
 
         <p>
           Sometimes the installed app may keep older files cached after a deployment
@@ -102,7 +102,7 @@ export default function HelpPanel() {
         </p>
 
         <p>
-          During the trusted-user phase, please text the app owner with:
+          During this portfolio demo phase, share feedback with the app owner:
         </p>
 
         <ul>

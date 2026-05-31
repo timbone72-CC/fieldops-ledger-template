@@ -46,46 +46,46 @@ export default function SendPayPeriodCsvToTrustedSheetButton() {
 
     const savedWebAppUrl = loadSavedTrustedSheetWebAppUrl();
     const webAppUrl = window.prompt(
-      "Paste the Trusted Sheet web app URL. Use the deployed Apps Script /exec URL. This URL can be saved on this device. The token will not be saved.",
+      "Paste the connected Google Sheet web app URL. Use the deployed Apps Script /exec URL. This URL can be saved on this device. The token will not be saved.",
       savedWebAppUrl
     );
 
     if (!webAppUrl) {
-      setSendStatus("Send canceled. No Trusted Sheet web app URL was provided.");
+      setSendStatus("Send canceled. No connected Google Sheet web app URL was provided.");
       return;
     }
 
     const trimmedWebAppUrl = webAppUrl.trim();
 
     if (!trimmedWebAppUrl) {
-      setSendStatus("Send canceled. No Trusted Sheet web app URL was provided.");
+      setSendStatus("Send canceled. No connected Google Sheet web app URL was provided.");
       return;
     }
 
     saveTrustedSheetWebAppUrl(trimmedWebAppUrl);
 
     const importToken = window.prompt(
-      "Paste the Trusted Sheet import token. For safety, this token is not saved."
+      "Paste the connected Google Sheet import token. For safety, this token is not saved."
     );
 
     if (!importToken) {
-      setSendStatus("Send canceled. No Trusted Sheet import token was provided.");
+      setSendStatus("Send canceled. No connected Google Sheet import token was provided.");
       return;
     }
 
     const confirmed = window.confirm(
-      "Send the current FieldLedger pay-period CSV to the Trusted Sheet?"
+      "Send the current FieldOps Ledger work CSV to the connected Google Sheet?"
     );
 
     if (!confirmed) {
-      setSendStatus("Send canceled. Trusted Sheet was not changed.");
+      setSendStatus("Send canceled. The connected Google Sheet was not changed.");
       return;
     }
 
     const payPeriod = loadActivePayPeriod();
     const csvText = buildPayPeriodCsv(payPeriod);
 
-    setSendStatus("Sending CSV to Trusted Sheet...");
+    setSendStatus("Sending work CSV to the connected Google Sheet...");
 
     const result = await sendPayPeriodCsvToTrustedSheet({
       webAppUrl: trimmedWebAppUrl,
@@ -98,14 +98,14 @@ export default function SendPayPeriodCsvToTrustedSheetButton() {
 
   return (
     <details className="export-action-group trusted-sheet-action">
-      <summary>Send to Trusted Sheet</summary>
+      <summary>Google Sheet handoff</summary>
 
       <button type="button" onClick={sendCsvToTrustedSheet}>
-        Send Current CSV
+        Send Current Work CSV
       </button>
 
       <p className="helper">
-        Sends the current CSV to your trusted Sheet. Use the deployed Apps Script
+        Sends the current work CSV to your connected Google Sheet. Use the deployed Apps Script
         /exec Web App URL. The Web App URL is saved on this device, but the
         import token is never saved.
       </p>
