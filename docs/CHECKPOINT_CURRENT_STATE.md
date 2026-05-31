@@ -2,7 +2,7 @@
 
 ## 1. Current Head
 
-fdd9e1e Update export helper identity comment
+b1cf460 Update checkpoint after template sanitization
 
 ## 2. Recent Commits
 
@@ -19,8 +19,9 @@ fdd9e1e Update export helper identity comment
 
 - Repo path: `~/projects/fieldops-ledger-template`
 - Branch: `main`
-- Remote: none configured yet
-- Current safe HEAD: `fdd9e1e Update export helper identity comment`
+- Remote: `origin` → `https://github.com/timbone72-CC/fieldops-ledger-template.git`
+- Pushed to `origin/main`
+- Current safe HEAD: `b1cf460 Update checkpoint after template sanitization`
 - Working tree was clean before this checkpoint edit.
 - Blockers: none known.
 
