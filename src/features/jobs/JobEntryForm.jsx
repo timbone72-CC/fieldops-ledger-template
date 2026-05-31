@@ -502,7 +502,7 @@ export default function JobEntryForm({ onJobSaved }) {
           type="text"
           value={ticketPhotoName}
           onChange={(event) => setTicketPhotoName(event.target.value)}
-          placeholder="Example: Scan Vision Ticket 12345"
+          placeholder="Example: Service Ticket 12345"
         />
       </label>
 

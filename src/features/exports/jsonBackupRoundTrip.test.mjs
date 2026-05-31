@@ -13,7 +13,7 @@ const originalPayPeriod = {
       payPeriodId: "active",
       jobType: "bucking",
       date: "2026-05-06",
-      company: "Legend Energy",
+      company: "Demo Field Services",
       rigNameOrNumber: "Rig 12",
       fieldTicketNumber: "FT-1001",
       hoursWorked: 6,

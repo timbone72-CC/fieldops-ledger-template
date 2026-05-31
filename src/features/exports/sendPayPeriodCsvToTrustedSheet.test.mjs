@@ -4,12 +4,12 @@ import { sendPayPeriodCsvToTrustedSheet } from "./sendPayPeriodCsvToTrustedSheet
 const successfulResult = await sendPayPeriodCsvToTrustedSheet({
   webAppUrl: " https://script.google.com/macros/s/test-deployment-id/exec ",
   importToken: " test-token ",
-  csvText: "Date,Company\n2026-05-01,Legend Energy",
+  csvText: "Date,Company\n2026-05-01,Demo Field Services",
   fetchImpl: async (url, options) => {
     assert.equal(url, "https://script.google.com/macros/s/test-deployment-id/exec");
     assert.equal(options.method, "POST");
     assert.equal(options.body.get("token"), "test-token");
-    assert.equal(options.body.get("csvText"), "Date,Company\n2026-05-01,Legend Energy");
+    assert.equal(options.body.get("csvText"), "Date,Company\n2026-05-01,Demo Field Services");
 
     return {
       async text() {
