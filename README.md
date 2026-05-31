@@ -1,16 +1,72 @@
-# React + Vite
+# FieldOps Ledger Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FieldOps Ledger Template is a customizable offline-first field operations app for mobile workers, contractors, technicians, inspectors, crew leads, and owner-operators.
 
-Currently, two official plugins are available:
+It is adapted from a real working field-ledger workflow and sanitized as a public portfolio demo.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What This Proves
 
-## React Compiler
+This project demonstrates that a practical field-work app can support:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- job and work-record tracking
+- expense tracking
+- pay-period style summaries
+- CSV export
+- JSON backup and restore
+- printable reports
+- mobile-friendly use
+- offline-first local browser storage
+- optional spreadsheet handoff workflows
 
-## Expanding the ESLint configuration
+The goal is not to present a full SaaS platform. The goal is to show how a real operational workflow can be turned into a lightweight, adaptable tool for different field and service workers.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Example Use Cases
+
+FieldOps Ledger can be adapted for workflows such as:
+
+- service calls
+- inspections
+- work orders
+- delivery logs
+- repair visits
+- contractor job tracking
+- crew work summaries
+- owner-operator field records
+
+## Current Scope
+
+This template currently focuses on local-first field recordkeeping.
+
+Included:
+
+- work records
+- expenses
+- summaries
+- backup/import
+- CSV export
+- printable reports
+- mobile-friendly layout
+- offline-first behavior
+
+Not included yet:
+
+- login
+- backend
+- cloud sync
+- roles
+- permissions
+- payments
+- admin dashboard
+- multi-user accounts
+
+## Privacy Boundary
+
+This public template should use fake demo data only.
+
+Do not add real customer names, real company names, real worker names, real addresses, real pay data, real Sheet URLs, Apps Script deployment IDs, import tokens, or private calendar events.
+
+## Portfolio Positioning
+
+FieldOps Ledger Template is intended to sit beside smaller PWA samples as a larger case-study app.
+
+It shows deeper workflow adaptation, offline-first storage, reporting, export, and practical field-operations structure.
