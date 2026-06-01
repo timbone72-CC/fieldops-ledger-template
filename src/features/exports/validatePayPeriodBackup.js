@@ -24,12 +24,58 @@ export function isValidPayPeriodBackup(value) {
  */
 
 function isValidJob(job) {
+  if (!isValidCommonJob(job)) {
+    return false;
+  }
+
+  const workType = job.workType || job.jobType;
+
+  if (workType === "hourly_work") {
+    return isValidHourlyWorkJob(job);
+  }
+
+  if (workType === "bucking" || workType === "torque_turn") {
+    return isValidLegacyJob(job);
+  }
+
+  return false;
+}
+
+function isValidCommonJob(job) {
   return (
     job &&
     typeof job === "object" &&
     typeof job.id === "string" &&
     typeof job.payPeriodId === "string" &&
     typeof job.date === "string" &&
+    Number.isFinite(Number(job.totalPay)) &&
+    Number(job.totalPay) >= 0 &&
+    typeof job.updatedAt === "string" &&
+    (
+      typeof job.createdAt === "string" ||
+      typeof job.createdAt === "undefined"
+    )
+  );
+}
+
+function isValidHourlyWorkJob(job) {
+  return (
+    typeof (job.clientCompany ?? job.company) === "string" &&
+    typeof (job.workType ?? job.jobType) === "string" &&
+    typeof job.siteLocation === "string" &&
+    typeof job.referenceNumber === "string" &&
+    Number.isFinite(Number(job.hoursWorked)) &&
+    Number(job.hoursWorked) >= 0 &&
+    Number.isFinite(Number(job.hourlyRateSnapshot)) &&
+    Number(job.hourlyRateSnapshot) >= 0 &&
+    Number.isFinite(Number(job.travelReimbursement)) &&
+    Number(job.travelReimbursement) >= 0 &&
+    typeof job.notes === "string"
+  );
+}
+
+function isValidLegacyJob(job) {
+  return (
     typeof job.company === "string" &&
     typeof job.rigNameOrNumber === "string" &&
     typeof job.fieldTicketNumber === "string" &&
@@ -45,17 +91,10 @@ function isValidJob(job) {
     Number(job.hoursWorked) >= 0 &&
     Number.isFinite(Number(job.baseJobPay)) &&
     Number(job.baseJobPay) >= 0 &&
-    Number.isFinite(Number(job.additionalHours)) &&
-    Number(job.additionalHours) >= 0 &&
+    Number.isFinite(Number(job.additionalHours ?? job.totalJobHours)) &&
+    Number(job.additionalHours ?? job.totalJobHours) >= 0 &&
     Number.isFinite(Number(job.hourlyRateSnapshot)) &&
-    Number(job.hourlyRateSnapshot) >= 0 &&
-    Number.isFinite(Number(job.totalPay)) &&
-    Number(job.totalPay) >= 0 &&
-    typeof job.updatedAt === "string" &&
-    (
-      typeof job.createdAt === "string" ||
-      typeof job.createdAt === "undefined"
-    )
+    Number(job.hourlyRateSnapshot) >= 0
   );
 }
 

@@ -23,6 +23,20 @@ const originalPayPeriod = {
       notes: "Bucking test job",
       totalPay: 168,
     },
+    {
+      id: "job-2",
+      payPeriodId: "active",
+      clientCompany: "Example Inspection Group",
+      workType: "hourly_work",
+      siteLocation: "Inspection Route 3",
+      referenceNumber: "WO-300",
+      date: "2026-05-07",
+      hoursWorked: 7.5,
+      hourlyRateSnapshot: 32,
+      travelReimbursement: 18,
+      notes: "Routine inspection",
+      totalPay: 240,
+    },
   ],
   expenses: [
     {
@@ -64,6 +78,12 @@ assert.deepEqual(restoredPayPeriod.mileageEntries, originalPayPeriod.mileageEntr
 assert.equal(restoredPayPeriod.schemaVersion, 1);
 
 assert.equal(restoredPayPeriod.jobs[0].ticketPhotoId, "ticket-photo-1");
+assert.equal(restoredPayPeriod.jobs[1].clientCompany, "Example Inspection Group");
+assert.equal(restoredPayPeriod.jobs[1].workType, "hourly_work");
+assert.equal(restoredPayPeriod.jobs[1].siteLocation, "Inspection Route 3");
+assert.equal(restoredPayPeriod.jobs[1].referenceNumber, "WO-300");
+assert.equal(restoredPayPeriod.jobs[1].travelReimbursement, 18);
+assert.equal(restoredPayPeriod.jobs[1].notes, "Routine inspection");
 assert.equal(restoredPayPeriod.expenses[0].receiptPhotoId, "receipt-photo-1");
 assert.equal(restoredPayPeriod.mileageEntries[0].vehicle, "Truck");
 
@@ -74,7 +94,7 @@ const mileageTotal = restoredPayPeriod.mileageEntries.reduce(
   0,
 );
 
-assert.equal(grossEarnings, 168);
+assert.equal(grossEarnings, 408);
 assert.equal(expenseTotal, 42.5);
 assert.equal(mileageTotal, 80.4);
 
