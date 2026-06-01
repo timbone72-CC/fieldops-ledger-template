@@ -21,13 +21,17 @@ function calculateDefaultBuckingHours(jobsCompleted, buckingState) {
   return Number(jobsCompleted || 0) * Number(BUCKING_HOURS_BY_STATE[buckingState] || 0);
 }
 
+function isLegacyJobType(jobType) {
+  return jobType === JOB_TYPES.BUCKING || jobType === JOB_TYPES.TORQUE_TURN;
+}
+
 export default function JobEntryForm({ onJobSaved }) {
   const ticketPhotoInputRef = useRef(null);
   const [editingJobId, setEditingJobId] = useState("");
-  const [jobType, setJobType] = useState(JOB_TYPES.BUCKING);
+  const [jobType, setJobType] = useState(JOB_TYPES.HOURLY_WORK);
   const [buckingState, setBuckingState] = useState(BUCKING_STATES.TEXAS);
   const [jobsCompleted, setJobsCompleted] = useState("1");
-  const [hoursWorked, setHoursWorked] = useState(String(BUCKING_HOURS_BY_STATE[BUCKING_STATES.TEXAS]));
+  const [hoursWorked, setHoursWorked] = useState("");
   const [baseJobPay, setBaseJobPay] = useState("");
   const [additionalHours, setAdditionalHours] = useState("");
   const [hourlyRateSnapshot, setHourlyRateSnapshot] = useState(loadSettings().hourlyRate);
@@ -41,6 +45,10 @@ export default function JobEntryForm({ onJobSaved }) {
   const [rigNameOrNumber, setRigNameOrNumber] = useState("");
   const [fieldTicketNumber, setFieldTicketNumber] = useState("");
   const [transportation, setTransportation] = useState("");
+  const [siteLocation, setSiteLocation] = useState("");
+  const [referenceNumber, setReferenceNumber] = useState("");
+  const [travelReimbursement, setTravelReimbursement] = useState("");
+  const [notes, setNotes] = useState("");
 
   const savedJobs = Array.isArray(loadActivePayPeriod().jobs)
     ? loadActivePayPeriod().jobs
@@ -58,9 +66,11 @@ export default function JobEntryForm({ onJobSaved }) {
       .filter(Boolean)),
   ).sort();
 
-  const rigOptions = Array.from(
+  const siteOptions = Array.from(
     new Set([
+      ...jobSuggestions.sites,
       ...jobSuggestions.rigs,
+      ...savedJobs.map((job) => job.siteLocation),
       ...savedJobs.map((job) => job.rigNameOrNumber),
     ]
       .map((value) => value?.trim())
@@ -79,7 +89,7 @@ export default function JobEntryForm({ onJobSaved }) {
       setJobType(job.jobType || JOB_TYPES.BUCKING);
       setBuckingState(job.buckingState || BUCKING_STATES.TEXAS);
       setJobsCompleted(job.jobType === JOB_TYPES.BUCKING ? String(job.jobsCompleted || "1") : "1");
-      setHoursWorked(job.jobType === JOB_TYPES.BUCKING ? String(job.hoursWorked || "") : "");
+      setHoursWorked(job.jobType === JOB_TYPES.TORQUE_TURN ? "" : String(job.hoursWorked || ""));
       setBaseJobPay(job.jobType === JOB_TYPES.TORQUE_TURN ? String(job.baseJobPay || "") : "");
       setAdditionalHours(job.jobType === JOB_TYPES.TORQUE_TURN ? String(job.additionalHours || "") : "");
       setHourlyRateSnapshot(job.hourlyRateSnapshot ?? loadSettings().hourlyRate ?? DEFAULT_HOURLY_RATE);
@@ -94,6 +104,10 @@ export default function JobEntryForm({ onJobSaved }) {
       setRigNameOrNumber(job.rigNameOrNumber || "");
       setFieldTicketNumber(job.fieldTicketNumber || "");
       setTransportation(job.transportation || "");
+      setSiteLocation(job.siteLocation || job.rigNameOrNumber || "");
+      setReferenceNumber(job.referenceNumber || job.fieldTicketNumber || "");
+      setTravelReimbursement(String(job.travelReimbursement ?? job.transportation ?? ""));
+      setNotes(job.notes || "");
       setSaveMessage("Editing saved job. Make changes, then save.");
     }
 
@@ -165,9 +179,10 @@ export default function JobEntryForm({ onJobSaved }) {
 
   function resetForm(message) {
     setEditingJobId("");
+    setJobType(JOB_TYPES.HOURLY_WORK);
     setBuckingState(BUCKING_STATES.TEXAS);
     setJobsCompleted("1");
-    setHoursWorked(String(BUCKING_HOURS_BY_STATE[BUCKING_STATES.TEXAS]));
+    setHoursWorked("");
     setBaseJobPay("");
     setAdditionalHours("");
     setTicketPhotoId("");
@@ -182,6 +197,10 @@ export default function JobEntryForm({ onJobSaved }) {
     setRigNameOrNumber("");
     setFieldTicketNumber("");
     setTransportation("");
+    setSiteLocation("");
+    setReferenceNumber("");
+    setTravelReimbursement("");
+    setNotes("");
     setSaveMessage(message);
   }
 
@@ -190,10 +209,11 @@ export default function JobEntryForm({ onJobSaved }) {
 
     const jobsCompletedValue = jobType === JOB_TYPES.BUCKING ? Number(jobsCompleted || 0) : 0;
     const hoursPerJobValue = jobType === JOB_TYPES.BUCKING ? Number(BUCKING_HOURS_BY_STATE[buckingState] || 0) : 0;
-    const hoursWorkedValue = jobType === JOB_TYPES.BUCKING ? Number(hoursWorked || 0) : 0;
+    const hoursWorkedValue = jobType !== JOB_TYPES.TORQUE_TURN ? Number(hoursWorked || 0) : 0;
     const baseJobPayValue = jobType === JOB_TYPES.TORQUE_TURN ? Number(baseJobPay || 0) : 0;
     const additionalHoursValue = jobType === JOB_TYPES.TORQUE_TURN ? Number(additionalHours || 0) : 0;
     const transportationValue = Number(transportation || 0);
+    const travelReimbursementValue = Number(travelReimbursement || 0);
     const hourlyRateSnapshotValue = Number(hourlyRateSnapshot || 0);
 
     if (
@@ -202,6 +222,7 @@ export default function JobEntryForm({ onJobSaved }) {
       baseJobPayValue < 0 ||
       additionalHoursValue < 0 ||
       transportationValue < 0 ||
+      travelReimbursementValue < 0 ||
       hourlyRateSnapshotValue < 0
     ) {
       setSaveMessage("Negative hours or pay values are not allowed.");
@@ -214,7 +235,7 @@ export default function JobEntryForm({ onJobSaved }) {
       try {
         nextTicketPhotoId = await savePhotoBlob(ticketPhotoFile);
       } catch {
-        setSaveMessage("Ticket photo could not be saved. Job was not saved.");
+        setSaveMessage("Work record photo could not be saved. Job was not saved.");
         return;
       }
     }
@@ -231,6 +252,10 @@ export default function JobEntryForm({ onJobSaved }) {
       rigNameOrNumber,
       fieldTicketNumber,
       transportation: transportationValue,
+      siteLocation,
+      referenceNumber,
+      travelReimbursement: travelReimbursementValue,
+      notes,
       id: editingJobId || crypto.randomUUID(),
       payPeriodId: payPeriod.id,
       ticketPhotoId: nextTicketPhotoId,
@@ -291,7 +316,7 @@ export default function JobEntryForm({ onJobSaved }) {
       return;
     }
 
-    const confirmed = window.confirm("Remove this ticket photo from the saved job?");
+    const confirmed = window.confirm("Remove this work record photo from the saved job?");
 
     if (!confirmed) {
       return;
@@ -300,14 +325,14 @@ export default function JobEntryForm({ onJobSaved }) {
     try {
       await deletePhotoBlob(ticketPhotoId);
     } catch {
-      setSaveMessage("Ticket photo reference was removed, but the stored photo could not be deleted.");
+      setSaveMessage("Work record photo reference was removed, but the stored photo could not be deleted.");
     }
 
     setTicketPhotoId("");
     setTicketPhotoName("");
     setTicketPhotoFile(null);
     setTicketPhotoPreviewUrl("");
-    setSaveMessage("Ticket photo removed. Save job changes to keep this update.");
+    setSaveMessage("Work record photo removed. Save job changes to keep this update.");
   }
 
   function cancelEdit() {
@@ -316,10 +341,10 @@ export default function JobEntryForm({ onJobSaved }) {
 
   return (
     <section className="panel">
-      <h2>{editingJobId ? "Edit Job Ticket" : "Add Job Ticket"}</h2>
+      <h2>{editingJobId ? "Edit Work Record" : "Add Work Record"}</h2>
 
       <label className="field">
-        Job Type
+        Work Type
         <select
           value={jobType}
           onChange={(event) => {
@@ -334,8 +359,9 @@ export default function JobEntryForm({ onJobSaved }) {
             }
           }}
         >
-          <option value={JOB_TYPES.BUCKING}>Bucking</option>
-          <option value={JOB_TYPES.TORQUE_TURN}>Torque Turn</option>
+          <option value={JOB_TYPES.HOURLY_WORK}>Hourly Work</option>
+          {editingJobId && <option value={JOB_TYPES.BUCKING}>Bucking</option>}
+          {editingJobId && <option value={JOB_TYPES.TORQUE_TURN}>Torque Turn</option>}
         </select>
       </label>
 
@@ -349,7 +375,7 @@ export default function JobEntryForm({ onJobSaved }) {
       </label>
 
       <label className="field">
-        Company
+        Client / Company
         <input
           type="text"
           list="timesheet-company-options"
@@ -364,34 +390,78 @@ export default function JobEntryForm({ onJobSaved }) {
         </datalist>
       </label>
 
-      <label className="field">
-        Rig Name/Number
+      {!isLegacyJobType(jobType) && (
+        <>
+          <label className="field">
+            Site / Location
+            <input
+              type="text"
+              list="site-location-options"
+              value={siteLocation}
+              onChange={(event) => setSiteLocation(event.target.value)}
+              placeholder="Select or type location"
+            />
+            <datalist id="site-location-options">
+              {siteOptions.map((siteOption) => (
+                <option key={siteOption} value={siteOption} />
+              ))}
+            </datalist>
+          </label>
+
+          <label className="field">
+            Reference Number
+            <input
+              type="text"
+              value={referenceNumber}
+              onChange={(event) => setReferenceNumber(event.target.value)}
+              placeholder="Example: WO-12345"
+            />
+          </label>
+
+          <label className="field">
+            Travel Reimbursement
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              value={travelReimbursement}
+              onChange={(event) => setTravelReimbursement(event.target.value)}
+              placeholder="Example: 150"
+            />
+          </label>
+        </>
+      )}
+
+      {isLegacyJobType(jobType) && (
+        <>
+          <label className="field">
+            Rig Name/Number
         <input
           type="text"
-          list="rig-name-options"
+              list="rig-name-options"
           value={rigNameOrNumber}
           onChange={(event) => setRigNameOrNumber(event.target.value)}
           placeholder="Select or type rig"
         />
-        <datalist id="rig-name-options">
-          {rigOptions.map((rigOption) => (
-            <option key={rigOption} value={rigOption} />
-          ))}
-        </datalist>
-      </label>
+            <datalist id="rig-name-options">
+              {siteOptions.map((rigOption) => (
+                <option key={rigOption} value={rigOption} />
+              ))}
+            </datalist>
+          </label>
 
-      <label className="field">
-        Field Ticket Number
+          <label className="field">
+            Field Ticket Number
         <input
           type="text"
           value={fieldTicketNumber}
           onChange={(event) => setFieldTicketNumber(event.target.value)}
           placeholder="Example: 12345"
         />
-      </label>
+          </label>
 
-      <label className="field">
-        Transportation
+          <label className="field">
+            Transportation
         <input
           type="number"
           min="0"
@@ -400,7 +470,9 @@ export default function JobEntryForm({ onJobSaved }) {
           onChange={(event) => setTransportation(event.target.value)}
           placeholder="Example: 150"
         />
-      </label>
+          </label>
+        </>
+      )}
 
       <label className="field">
         Hourly Rate
@@ -460,6 +532,19 @@ export default function JobEntryForm({ onJobSaved }) {
         </>
       )}
 
+      {jobType === JOB_TYPES.HOURLY_WORK && (
+        <label className="field">
+          Hours Worked
+          <input
+            type="number"
+            min="0"
+            step="0.25"
+            value={hoursWorked}
+            onChange={(event) => setHoursWorked(event.target.value)}
+          />
+        </label>
+      )}
+
       {jobType === JOB_TYPES.TORQUE_TURN && (
         <>
           <label className="field">
@@ -486,8 +571,13 @@ export default function JobEntryForm({ onJobSaved }) {
         </>
       )}
 
+      <label className="field">
+        Notes
+        <textarea value={notes} onChange={(event) => setNotes(event.target.value)} />
+      </label>
+
       <CameraCapture
-        label="Take Ticket Photo"
+        label={isLegacyJobType(jobType) ? "Take Ticket Photo" : "Take Work Record Photo"}
         onPhotoCaptured={(photoFile) => {
           setTicketPhotoFile(photoFile);
           if (ticketPhotoInputRef.current) {
@@ -497,17 +587,17 @@ export default function JobEntryForm({ onJobSaved }) {
       />
 
       <label className="field">
-        Ticket Photo Name
+        {isLegacyJobType(jobType) ? "Ticket Photo Name" : "Work Record Photo Name"}
         <input
           type="text"
           value={ticketPhotoName}
           onChange={(event) => setTicketPhotoName(event.target.value)}
-          placeholder="Example: Service Ticket 12345"
+          placeholder={isLegacyJobType(jobType) ? "Example: Service Ticket 12345" : "Example: Work Order 12345"}
         />
       </label>
 
       <label className="field">
-        Upload Ticket Photo
+        {isLegacyJobType(jobType) ? "Upload Ticket Photo" : "Upload Work Record Photo"}
         <input
           ref={ticketPhotoInputRef}
           type="file"
@@ -528,13 +618,13 @@ export default function JobEntryForm({ onJobSaved }) {
           )}
 
           {ticketPhotoId && !ticketPhotoFile && (
-            <p className="helper">Saved ticket photo.</p>
+            <p className="helper">Saved work record photo.</p>
           )}
 
           {ticketPhotoPreviewUrl && (
             <img
               src={ticketPhotoPreviewUrl}
-              alt="Attached ticket preview"
+              alt="Attached work record preview"
               style={{
                 display: "block",
                 maxWidth: "240px",
@@ -546,7 +636,7 @@ export default function JobEntryForm({ onJobSaved }) {
             />
           )}
 
-          <p className="helper">{ticketPhotoName || ticketPhotoFile?.name || "Unnamed ticket photo"}</p>
+          <p className="helper">{ticketPhotoName || ticketPhotoFile?.name || "Unnamed work record photo"}</p>
 
           <button type="button" onClick={removeTicketPhoto}>
             Remove Photo

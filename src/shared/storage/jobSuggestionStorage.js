@@ -2,6 +2,7 @@ import { STORAGE_KEYS } from "../constants/storageKeys.js";
 
 const EMPTY_JOB_SUGGESTIONS = {
   companies: [],
+  sites: [],
   rigs: [],
 };
 
@@ -27,6 +28,7 @@ export function loadJobSuggestions() {
 
     return {
       companies: cleanSuggestionValues(parsedValue.companies),
+      sites: cleanSuggestionValues(parsedValue.sites),
       rigs: cleanSuggestionValues(parsedValue.rigs),
     };
   } catch {
@@ -37,6 +39,7 @@ export function loadJobSuggestions() {
 export function saveJobSuggestions(nextSuggestions) {
   const cleanSuggestions = {
     companies: cleanSuggestionValues(nextSuggestions?.companies),
+    sites: cleanSuggestionValues(nextSuggestions?.sites),
     rigs: cleanSuggestionValues(nextSuggestions?.rigs),
   };
 
@@ -50,6 +53,7 @@ export function rememberJobSuggestions(job) {
 
   return saveJobSuggestions({
     companies: [...currentSuggestions.companies, job?.company],
+    sites: [...currentSuggestions.sites, job?.siteLocation],
     rigs: [...currentSuggestions.rigs, job?.rigNameOrNumber],
   });
 }
