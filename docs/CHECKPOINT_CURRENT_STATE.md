@@ -2,15 +2,15 @@
 
 ## 1. Current Head
 
-29bc954 Rename trusted user FieldOps docs
+ae1f02d Bump FieldOps PWA cache for icon refresh
 
 ## 2. Recent Commits
 
+- ae1f02d Bump FieldOps PWA cache for icon refresh
+- 5db0651 Polish FieldOps PWA icon
+- a3f6837 Fix FieldOps Pages PWA paths
+- ff31a17 Update checkpoint after trusted user doc rename
 - 29bc954 Rename trusted user FieldOps docs
-- 03fce44 Clarify checkpoint head tracking
-- 6b9e65b Polish FieldOps release plan docs
-- e75b236 Update checkpoint after PWA release plan rename
-- e33a7f0 Rename FieldOps PWA release plan doc
 
 ## 3. Repo State
 
@@ -18,9 +18,9 @@
 - Branch: `main`
 - Remote: `origin` is configured for the public template repo.
 - Pushed to `origin/main`
-- Captured safe repo state: `29bc954 Rename trusted user FieldOps docs`
+- Captured safe repo state: `ae1f02d Bump FieldOps PWA cache for icon refresh`
 - This checkpoint documents the latest pushed clean state before the checkpoint edit itself; its own future commit is intentionally not self-referenced.
-- The grouped release-plan and trusted-user public docs polish is the current safe documented state.
+- FieldOps Pages PWA paths, live install behavior, and public PWA icon refresh are now validated.
 - Blockers: none known.
 
 ## 4. Project Purpose
@@ -128,3 +128,4 @@ Recommended verification before commit:
 - Live GitHub Pages demo confirmed working for the published template repo.
 - GitHub Pages source is `main` branch and `/docs` folder.
 - Vite base path is `/fieldops-ledger-template/`.
+- Live app loads, refreshes, installs, and shows the polished FieldOps PWA icon after the cache bump.
