@@ -1,4 +1,4 @@
-const CACHE_NAME = "fieldledger-v4-offline-shell";
+const CACHE_NAME = "fieldledger-v5-offline-shell";
 
 const APP_SHELL = [
   "/fieldops-ledger-template/",
