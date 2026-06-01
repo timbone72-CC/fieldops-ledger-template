@@ -1,14 +1,14 @@
-# FieldLedger Trusted User Instructions
+# FieldOps Ledger Trusted User Instructions
 
 ## 1. Purpose
 
-These instructions explain how a trusted user should test FieldLedger safely.
+These instructions explain how a trusted user should test FieldOps Ledger safely.
 
 This is not a public release guide.
 
-## 2. What FieldLedger Is
+## 2. What FieldOps Ledger Is
 
-FieldLedger is a work-record app for tracking:
+FieldOps Ledger is a work-record app for tracking:
 
 - job tickets
 - pay periods
@@ -17,17 +17,17 @@ FieldLedger is a work-record app for tracking:
 - timesheet exports
 - calendar reminders
 
-FieldLedger is designed for manual review before saving.
+FieldOps Ledger is designed for manual review before saving.
 
 ## 3. What You Should Receive
 
 Before testing, you should receive:
 
-- the FieldLedger app link
+- the FieldOps Ledger app link
 - your copied Google Sheet link
 - the deployed Apps Script Web App `/exec` URL for your copied Sheet
 - the import token for your copied Sheet
-- the name of your dedicated FieldLedger calendar
+- the name of your dedicated FieldOps Ledger calendar
 - these trusted-user instructions
 - a reminder to download a JSON backup before testing destructive flows
 
@@ -35,7 +35,7 @@ Do not use the owner's master Sheet or personal/default calendar for testing.
 
 ## 4. Important Data Warning
 
-FieldLedger stores app data in the browser used on that device.
+FieldOps Ledger stores app data in the browser used on that device.
 
 Phone data and computer data are separate unless moved with JSON backup/import.
 
@@ -64,7 +64,7 @@ Then verify:
 
 ## 6. Google Sheets Test
 
-Import a small FieldLedger CSV into the Google Sheet.
+Import a small FieldOps Ledger CSV into the Google Sheet.
 
 Confirm:
 
@@ -84,7 +84,7 @@ Confirm:
 - the Web App URL is saved only in this browser/device after it is entered
 - every new phone, laptop, browser, or Linux setup must enter the Web App URL before its first send
 - the import token is entered only when sending
-- the import token is not saved by FieldLedger
+- the import token is not saved by FieldOps Ledger
 - every new phone, laptop, browser, or Linux setup must enter the import token when sending
 - phone, laptop, and desktop browser data are separate
 - if this device has no saved jobs, restore a JSON backup before sending
@@ -93,16 +93,16 @@ If the send fails, check:
 
 - the Web App URL is the deployed `/exec` URL, not the editor URL
 - the import token matches the copied Trusted Sheet setup
-- the current browser has saved FieldLedger jobs
+- the current browser has saved FieldOps Ledger jobs
 - the copied Trusted Sheet is the tester Sheet, not the owner/master Sheet
 
 ## 8. Optional Advanced Calendar Test
 
 Calendar testing is optional for the first trusted-user app test unless the tester is specifically assigned to test calendar reminders.
 
-Use the dedicated FieldLedger calendar assigned for testing. Use the exact calendar name provided in your share package.
+Use the dedicated FieldOps Ledger calendar assigned for testing. Use the exact calendar name provided in your share package.
 
-Do not sync generated FieldLedger work events to a personal/default calendar.
+Do not sync generated FieldOps Ledger work events to a personal/default calendar.
 
 If calendar testing is assigned, confirm:
 

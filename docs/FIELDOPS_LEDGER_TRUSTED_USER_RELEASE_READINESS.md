@@ -1,8 +1,8 @@
-# FieldLedger Trusted User Release Readiness
+# FieldOps Ledger Trusted User Release Readiness
 
 ## 1. Purpose
 
-This document defines when FieldLedger is ready to share with a limited trusted user.
+This document defines when FieldOps Ledger is ready to share with a limited trusted user.
 
 This is not a public launch checklist.
 
@@ -10,8 +10,8 @@ This is the single trusted-user release gate. The setup checklist, tester instru
 
 Supporting docs:
 
-- `docs/FIELDLEDGER_TRUSTED_USER_SETUP_CHECKLIST.md`
-- `docs/FIELDLEDGER_TRUSTED_USER_INSTRUCTIONS.md`
+- `docs/FIELDOPS_LEDGER_TRUSTED_USER_SETUP_CHECKLIST.md`
+- `docs/FIELDOPS_LEDGER_TRUSTED_USER_INSTRUCTIONS.md`
 - `docs/FIELDLEDGER_TRUSTED_USER_CONTRACT.md`
 - `docs/FIELDLEDGER_TRUSTED_USER_LOCAL_DOCS.md`
 - `docs/FIELDLEDGER_SHEETS_INTEGRATION_CONTRACT.md`
@@ -20,7 +20,7 @@ Supporting docs:
 
 Trusted-user release means the app may be shared with a known tester who understands:
 
-- FieldLedger stores data locally in the browser
+- FieldOps Ledger stores data locally in the browser
 - phone, laptop, and desktop data are separate
 - JSON backup/import is the transfer method
 - tax estimates are planning only, not tax advice
@@ -31,7 +31,7 @@ Trusted-user release means the app may be shared with a known tester who underst
 
 Before sharing with a trusted user, confirm:
 
-- the live FieldLedger app link opens
+- the live FieldOps Ledger app link opens
 - the app can create a test pay period
 - one Bucking job can be saved
 - one Torque Turn job can be saved
@@ -51,11 +51,11 @@ Before sharing with a trusted user, confirm:
 
 Each trusted user should receive:
 
-- FieldLedger app link
+- FieldOps Ledger app link
 - copied tester Google Sheet link
 - deployed Apps Script Web App `/exec` URL for the copied Sheet
 - import token for the copied Sheet, shared separately from the Sheet link when possible
-- dedicated FieldLedger calendar name provided for that tester
+- dedicated FieldOps Ledger calendar name provided for that tester
 - trusted-user instructions
 - backup warning
 
@@ -73,7 +73,7 @@ Trusted-user guidance must clearly say:
 
 ## 6. Not Ready For Public Release
 
-FieldLedger is not ready for public customers until these are improved:
+FieldOps Ledger is not ready for public customers until these are improved:
 
 - onboarding
 - backup warnings
@@ -90,7 +90,7 @@ Trusted-user sharing is ready only when:
 - checklist docs match the live app workflow
 - tester Sheet setup can be repeated from a fresh copied Sheet
 - small send-to-Sheet test succeeds
-- small sync to the tester's dedicated FieldLedger calendar succeeds
+- small sync to the tester's dedicated FieldOps Ledger calendar succeeds
 - calendar duplicate prevention and cleanup/regeneration are verified
 - JSON backup/import recovery is tested
 - trusted-user instructions are clear
