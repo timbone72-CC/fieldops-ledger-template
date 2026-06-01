@@ -224,7 +224,7 @@ Current CSV schema version:
 
 - csvSchemaVersion: 1
 - consumer: Google Sheets RawData tab
-- purpose: Legend-style timesheet import
+- purpose: generic template timesheet import
 
 The CSV header row must preserve this exact column order:
 
@@ -565,17 +565,17 @@ Google Calendar exists as a downstream scheduling/presentation layer only.
 
 Dedicated work calendar rule:
 
-- Apps Script calendar sync must target the dedicated calendar named LEG Work Calendar.
+- Apps Script calendar sync must target the dedicated calendar named FieldOps Work Calendar.
 - Apps Script must not use the personal/default Google Calendar for generated FieldLedger work events.
-- The sync function must get or create LEG Work Calendar and abort safely if that calendar cannot be accessed by name.
-- Generated work events may be shared from LEG Work Calendar without exposing personal calendar events.
+- The sync function must get or create FieldOps Work Calendar and abort safely if that calendar cannot be accessed by name.
+- Generated work events may be shared from FieldOps Work Calendar without exposing personal calendar events.
 - Clearing synced rows from CalendarEvents must not delete Google Calendar events.
 
 ## 35. Timesheet Governed Boundary
 
 This fixed boundary is intentional.
 
-Rows 12-38 map to the governed Legend Energy template layout and are not dynamically resized.
+Rows 12-38 map to the governed FieldOps template layout and are not dynamically resized.
 
 Dynamic expansion or shrinking of the Timesheet repair area is not allowed unless the template contract itself changes first.
 
@@ -658,20 +658,20 @@ Repeated calendar sync must skip already-synced rows.
 
 Rows with existing synced event IDs must not create duplicate Google Calendar events.
 
-Rows with stored event IDs must be checked against LEG Work Calendar before being skipped.
+Rows with stored event IDs must be checked against FieldOps Work Calendar before being skipped.
 
-If a stored event ID no longer exists in LEG Work Calendar, the row must be marked `Missing calendar event` instead of silently passing as synced.
+If a stored event ID no longer exists in FieldOps Work Calendar, the row must be marked `Missing calendar event` instead of silently passing as synced.
 
 Missing calendar events must not be silently recreated during normal sync.
 
-Before creating a new Google Calendar event from a Pending CalendarEvents row, sync must check LEG Work Calendar for an existing visible event with the same governed identity (title, start date, and end date). If a matching visible event already exists without a stored event ID, normal sync must not create another event.
+Before creating a new Google Calendar event from a Pending CalendarEvents row, sync must check FieldOps Work Calendar for an existing visible event with the same governed identity (title, start date, and end date). If a matching visible event already exists without a stored event ID, normal sync must not create another event.
 
 Operator recovery must be explicit: a restore action may clear the stale event ID, mark the row `Pending`, and then allow the normal sync flow to recreate the downstream calendar event with a new event ID.
 
-Calendar reconciliation destructive recovery has been live-verified: deleting a synced LEG Work Calendar event and rerunning sync marked the row `Missing calendar event`; running `Restore Missing Calendar Events` reset only that row to `Pending`; rerunning sync recreated only the missing event; already-synced valid events were skipped and not duplicated.
+Calendar reconciliation destructive recovery has been live-verified: deleting a synced FieldOps Work Calendar event and rerunning sync marked the row `Missing calendar event`; running `Restore Missing Calendar Events` reset only that row to `Pending`; rerunning sync recreated only the missing event; already-synced valid events were skipped and not duplicated.
 
-Calendar duplicate recovery has been live-verified: a manually-created matching visible event in LEG Work Calendar prevented a Pending CalendarEvents row from creating another duplicate event; sync completed with no new duplicate event and no failed rows.
+Calendar duplicate recovery has been live-verified: a manually-created matching visible event in FieldOps Work Calendar prevented a Pending CalendarEvents row from creating another duplicate event; sync completed with no new duplicate event and no failed rows.
 
-LEG Work Calendar remains downstream-only.
+FieldOps Work Calendar remains downstream-only.
 
 Calendar sync must never mutate FieldLedger source data.
