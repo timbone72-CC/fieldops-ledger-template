@@ -7,6 +7,7 @@ export const DEFAULT_FEDERAL_TAX_RATE = 0.12;
 export const DEFAULT_STATE_TAX_RATE = 0.045;
 
 export const JOB_TYPES = {
+  HOURLY_WORK: "hourly_work",
   BUCKING: "bucking",
   TORQUE_TURN: "torque_turn",
 };

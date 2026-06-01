@@ -2,6 +2,11 @@ export function calculateJobPay(job) {
   const jobType = job?.jobType;
   const hourlyRateSnapshot = safeNumber(job?.hourlyRateSnapshot);
 
+  if (jobType === "hourly_work") {
+    const hoursWorked = safeNumber(job?.hoursWorked);
+    return hoursWorked * hourlyRateSnapshot;
+  }
+
   if (jobType === "bucking") {
     const hoursWorked = safeNumber(job?.hoursWorked);
     return hoursWorked * hourlyRateSnapshot;

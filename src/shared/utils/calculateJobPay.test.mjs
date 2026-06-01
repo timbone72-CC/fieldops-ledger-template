@@ -3,6 +3,15 @@ import { calculateJobPay } from "./calculateJobPay.js";
 
 assert.equal(
   calculateJobPay({
+    jobType: "hourly_work",
+    hoursWorked: 7.5,
+    hourlyRateSnapshot: 32,
+  }),
+  240
+);
+
+assert.equal(
+  calculateJobPay({
     jobType: "bucking",
     hoursWorked: 6,
     hourlyRateSnapshot: 28,
