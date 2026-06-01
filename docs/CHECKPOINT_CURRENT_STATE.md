@@ -2,15 +2,15 @@
 
 ## 1. Current Head
 
-edbfea4 Update checkpoint after live Pages validation
+e33a7f0 Rename FieldOps PWA release plan doc
 
 ## 2. Recent Commits
 
-- dc15f97 Update checkpoint after Pages base path
-- dd30420 Fix GitHub Pages base path
-- fbdf9af Update checkpoint after public README
-- e9ce19b Add public FieldOps Ledger README
-- 4234c19 Update checkpoint after GitHub remote setup
+- e33a7f0 Rename FieldOps PWA release plan doc
+- 2fd79ed Polish inherited public docs wording
+- 9c41b7a Remove inherited private sheet identifiers
+- 76105af Correct checkpoint after live Pages validation
+- edbfea4 Update checkpoint after live Pages validation
 
 ## 3. Repo State
 
@@ -18,7 +18,7 @@ edbfea4 Update checkpoint after live Pages validation
 - Branch: `main`
 - Remote: `origin` is configured for the public template repo.
 - Pushed to `origin/main`
-- Current safe HEAD: `edbfea4 Update checkpoint after live Pages validation`
+- Current safe HEAD: `e33a7f0 Rename FieldOps PWA release plan doc`
 - Working tree was clean before this checkpoint edit.
 - Blockers: none known.
 
