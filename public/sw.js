@@ -1,13 +1,13 @@
 const CACHE_NAME = "fieldledger-v4-offline-shell";
 
 const APP_SHELL = [
-  "/fieldledger/",
-  "/fieldledger/manifest.webmanifest",
-  "/fieldledger/favicon.svg",
-  "/fieldledger/icon-192.png",
-  "/fieldledger/icon-512.png",
-  "/fieldledger/assets/index-BvJ7mAsr.js",
-  "/fieldledger/assets/index-BmXoxkAs.css"
+  "/fieldops-ledger-template/",
+  "/fieldops-ledger-template/manifest.webmanifest",
+  "/fieldops-ledger-template/favicon.svg",
+  "/fieldops-ledger-template/icon-192.png",
+  "/fieldops-ledger-template/icon-512.png",
+  "/fieldops-ledger-template/assets/index-VQARfxfZ.js",
+  "/fieldops-ledger-template/assets/index-BmXoxkAs.css"
 ];
 
 self.addEventListener("install", (event) => {
@@ -50,12 +50,12 @@ self.addEventListener("fetch", (event) => {
           const responseClone = networkResponse.clone();
 
           caches.open(CACHE_NAME).then((cache) => {
-            cache.put("/fieldledger/", responseClone);
+            cache.put("/fieldops-ledger-template/", responseClone);
           });
 
           return networkResponse;
         })
-        .catch(() => caches.match("/fieldledger/"))
+        .catch(() => caches.match("/fieldops-ledger-template/"))
     );
 
     return;

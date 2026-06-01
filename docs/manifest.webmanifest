@@ -2,24 +2,24 @@
   "name": "FieldOps Ledger",
   "short_name": "FieldOps",
   "description": "Offline-first field operations ledger for mobile workers, contractors, technicians, inspectors, and service teams.",
-  "start_url": "/fieldledger/",
+  "start_url": "/fieldops-ledger-template/",
   "display": "standalone",
   "background_color": "#08060d",
   "theme_color": "#863bff",
   "icons": [
     {
-      "src": "/fieldledger/icon-192.png",
+      "src": "/fieldops-ledger-template/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/fieldledger/icon-512.png",
+      "src": "/fieldops-ledger-template/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "id": "/fieldledger/",
-  "scope": "/fieldledger/"
+  "id": "/fieldops-ledger-template/",
+  "scope": "/fieldops-ledger-template/"
 }
