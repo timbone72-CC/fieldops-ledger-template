@@ -1,16 +1,16 @@
-# FieldLedger PWA Release Plan
+# FieldOps Ledger PWA Release Plan
 
 ## 1. Purpose
 
-Make FieldLedger feel like a real downloadable app while keeping the MVP offline-first, AI-free, net-zero-cost, and manual-review-first.
+Make FieldOps Ledger feel like a real downloadable app while keeping the MVP offline-first, AI-free, net-zero-cost, and manual-review-first.
 
 ## 2. Release Goal
 
-FieldLedger should be installable from a phone or computer browser as a Progressive Web App.
+FieldOps Ledger should be installable from a phone or computer browser as a Progressive Web App.
 
 The user should be able to:
 
-- Open FieldLedger from an app icon
+- Open FieldOps Ledger from an app icon
 - Use it in standalone app mode
 - Keep local records on the device
 - Download JSON backups
@@ -69,6 +69,6 @@ This phase is done only when:
 - Existing core tests pass
 - JSON backup still downloads
 - CSV export still downloads
-- No existing FieldLedger calculations change
+- No existing FieldOps Ledger calculations change
 - GitHub Pages live app still works
 - Checkpoint is updated from git log
