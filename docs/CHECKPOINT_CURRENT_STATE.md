@@ -2,15 +2,15 @@
 
 ## 1. Current Head
 
-e75b236 Update checkpoint after PWA release plan rename
+6b9e65b Polish FieldOps release plan docs
 
 ## 2. Recent Commits
 
+- 6b9e65b Polish FieldOps release plan docs
 - e75b236 Update checkpoint after PWA release plan rename
 - e33a7f0 Rename FieldOps PWA release plan doc
 - 2fd79ed Polish inherited public docs wording
 - 9c41b7a Remove inherited private sheet identifiers
-- 76105af Correct checkpoint after live Pages validation
 
 ## 3. Repo State
 
@@ -18,8 +18,9 @@ e75b236 Update checkpoint after PWA release plan rename
 - Branch: `main`
 - Remote: `origin` is configured for the public template repo.
 - Pushed to `origin/main`
-- Current safe HEAD: `e75b236 Update checkpoint after PWA release plan rename`
-- Working tree was clean before this checkpoint edit.
+- Captured safe repo state: `6b9e65b Polish FieldOps release plan docs`
+- This checkpoint documents the latest pushed clean state before the checkpoint edit itself; its own future commit is intentionally not self-referenced.
+- The grouped release-plan docs polish is the current safe documented state.
 - Blockers: none known.
 
 ## 4. Project Purpose
