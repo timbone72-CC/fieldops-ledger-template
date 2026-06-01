@@ -10,7 +10,7 @@ No fixes are applied in this document.
 
 Codex audit completed against:
 
-- Repo root: /home/timbo/projects/fieldledger
+- Repo root: original private workflow repo
 - Branch: main
 - Working tree: clean
 - Current head: 36911e1 Update checkpoint after calendar verification + timesheet drift fix

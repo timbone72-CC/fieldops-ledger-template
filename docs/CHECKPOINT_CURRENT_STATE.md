@@ -16,7 +16,7 @@ edbfea4 Update checkpoint after live Pages validation
 
 - Repo path: `~/projects/fieldops-ledger-template`
 - Branch: `main`
-- Remote: `origin` → `https://github.com/timbone72-CC/fieldops-ledger-template.git`
+- Remote: `origin` is configured for the public template repo.
 - Pushed to `origin/main`
 - Current safe HEAD: `edbfea4 Update checkpoint after live Pages validation`
 - Working tree was clean before this checkpoint edit.
@@ -117,7 +117,6 @@ Recommended verification before commit:
 
 ## 7. Live GitHub Pages Validation
 
-- Live GitHub Pages URL confirmed working:
-  `https://timbone72-cc.github.io/fieldops-ledger-template/`
+- Live GitHub Pages demo confirmed working for the published template repo.
 - GitHub Pages source is `main` branch and `/docs` folder.
 - Vite base path is `/fieldops-ledger-template/`.

@@ -2,13 +2,11 @@
 
 ## Purpose
 
-Trusted-user setup and reference documents are maintained locally on Tim's laptop.
+Trusted-user setup and reference documents are maintained outside the repo on the operator's local device.
 
 These files are intentionally outside the FieldLedger repo:
 
-```text
-/home/timbone/Documents/FieldLedger-Trusted-Sheets
-```
+Use an operator-managed local folder that is not committed to the repo.
 
 ## Known Local Files
 
@@ -40,10 +38,10 @@ Do not copy real tokens, Web App URLs, tester emails, tester names, copied Sheet
 
 ## Operating Rule
 
-Before creating any new trusted-user checklist, setup message, tester reference document, or instruction file, first check the local folder:
+Before creating any new trusted-user checklist, setup message, tester reference document, or instruction file, first check the operator-managed local folder:
 
 ```bash
-ls -1 ~/Documents/FieldLedger-Trusted-Sheets | sort
+ls -1 <local-trusted-user-docs-folder> | sort
 ```
 
 If the file already exists, update the existing local file instead of recreating duplicate documentation.

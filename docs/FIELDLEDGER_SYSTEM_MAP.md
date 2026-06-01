@@ -15,7 +15,7 @@ The app is currently developed on the user's PC.
 Workspace path:
 
 ```text
-/home/timbo/projects/fieldledger
+<local-template-workspace>
 Editor
 
 Primary editor:
@@ -45,10 +45,10 @@ Every stable change should be committed before moving to the next major feature.
 
 GitHub
 
-GitHub will be used later for:
+GitHub is used for:
 
 backup
-transfer to laptop
+hosted demo publishing
 future collaboration
 release history
 
@@ -130,8 +130,6 @@ docs contracts
 
 FieldLedger does not currently include:
 
-GitHub remote
-cloud hosting
 backend server
 AI
 OCR

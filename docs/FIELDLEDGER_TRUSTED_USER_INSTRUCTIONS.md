@@ -110,7 +110,7 @@ If calendar testing is assigned, confirm:
 - Sync Calendar Events creates events
 - eventId values are saved
 - syncing the same rows again does not create duplicates
-- clearing CalendarEvents staging rows does not delete existing LEG Work Calendar events
+- clearing CalendarEvents staging rows does not delete existing FieldOps Work Calendar events
 
 ## 9. Optional Calendar Rollover Test
 

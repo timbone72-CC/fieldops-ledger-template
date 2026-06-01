@@ -37,9 +37,9 @@ Confirmed behavior after script import and recovery hardening:
 - Timesheet formulas and validations are repaired only inside the governed rows 12–38.
 - Timesheet total row H39 is governed.
 - Schedule generation skips duplicate pending rows.
-- Calendar sync targets LEG Work Calendar.
+- Calendar sync targets FieldOps Work Calendar.
 - Calendar sync skips valid already-synced rows.
-- Calendar sync marks rows as Missing calendar event when a stored event ID no longer exists in LEG Work Calendar.
+- Calendar sync marks rows as Missing calendar event when a stored event ID no longer exists in FieldOps Work Calendar.
 
 ## 5. Current Boundary
 
@@ -47,7 +47,7 @@ FieldLedger app data remains authoritative.
 
 Google Sheets remains a downstream operational/reporting layer.
 
-LEG Work Calendar remains a downstream visualization layer.
+FieldOps Work Calendar remains a downstream visualization layer.
 
 Calendar sync must not mutate FieldLedger app source data.
 
@@ -111,7 +111,7 @@ Expected result:
 Failure result:
 
 - If the second run appends duplicate rows, schedule duplicate prevention has failed.
-- Do not sync those duplicate rows to LEG Work Calendar until the duplicate cause is fixed.
+- Do not sync those duplicate rows to FieldOps Work Calendar until the duplicate cause is fixed.
 
 ## 9. Calendar Sync Reconciliation Verification Drill
 
@@ -121,13 +121,13 @@ Verify calendar sync only creates missing downstream events, skips valid synced 
 
 Manual test steps:
 
-1. Use a test Sheet copy connected to LEG Work Calendar.
+1. Use a test Sheet copy connected to FieldOps Work Calendar.
 2. Confirm CalendarEvents contains pending rows from schedule generation.
 3. Run calendar sync once.
 4. Confirm pending rows receive calendar event IDs.
 5. Run calendar sync a second time.
-6. Confirm already-synced rows do not create duplicate LEG Work Calendar events.
-7. Delete one synced event from LEG Work Calendar.
+6. Confirm already-synced rows do not create duplicate FieldOps Work Calendar events.
+7. Delete one synced event from FieldOps Work Calendar.
 8. Run calendar sync again.
 9. Confirm the deleted event row is marked Missing calendar event instead of silently duplicating or ignoring the missing event.
 
@@ -141,7 +141,7 @@ Expected result:
 
 Failure result:
 
-- If duplicate LEG Work Calendar events are created, stop and inspect sync identity handling.
+- If duplicate FieldOps Work Calendar events are created, stop and inspect sync identity handling.
 - If missing events are ignored, stale event recovery has failed.
 - If FieldLedger app data is changed, the downstream-only boundary has been violated.
 
