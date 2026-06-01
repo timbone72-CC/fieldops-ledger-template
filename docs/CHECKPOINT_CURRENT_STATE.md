@@ -2,15 +2,15 @@
 
 ## 1. Current Head
 
-6b9e65b Polish FieldOps release plan docs
+29bc954 Rename trusted user FieldOps docs
 
 ## 2. Recent Commits
 
+- 29bc954 Rename trusted user FieldOps docs
+- 03fce44 Clarify checkpoint head tracking
 - 6b9e65b Polish FieldOps release plan docs
 - e75b236 Update checkpoint after PWA release plan rename
 - e33a7f0 Rename FieldOps PWA release plan doc
-- 2fd79ed Polish inherited public docs wording
-- 9c41b7a Remove inherited private sheet identifiers
 
 ## 3. Repo State
 
@@ -18,9 +18,9 @@
 - Branch: `main`
 - Remote: `origin` is configured for the public template repo.
 - Pushed to `origin/main`
-- Captured safe repo state: `6b9e65b Polish FieldOps release plan docs`
+- Captured safe repo state: `29bc954 Rename trusted user FieldOps docs`
 - This checkpoint documents the latest pushed clean state before the checkpoint edit itself; its own future commit is intentionally not self-referenced.
-- The grouped release-plan docs polish is the current safe documented state.
+- The grouped release-plan and trusted-user public docs polish is the current safe documented state.
 - Blockers: none known.
 
 ## 4. Project Purpose
@@ -78,6 +78,13 @@ Do not add yet:
 - Sanitized demo default suggestions.
 - Sanitized remaining test/demo identity strings.
 - Replaced remaining copied FieldLedger export helper comment with FieldOps Ledger wording.
+
+### 6.5 Trusted-User Public Docs Polish
+
+- Renamed `FIELDOPS_LEDGER_TRUSTED_USER_INSTRUCTIONS.md`.
+- Renamed `FIELDOPS_LEDGER_TRUSTED_USER_SETUP_CHECKLIST.md`.
+- Renamed `FIELDOPS_LEDGER_TRUSTED_USER_RELEASE_READINESS.md`.
+- Updated trusted-user public docs cross-links and visible FieldOps Ledger wording.
 
 ## 7. Confirmed Checks
 
