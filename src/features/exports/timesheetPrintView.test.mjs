@@ -4,12 +4,12 @@ import { readFileSync } from "node:fs";
 const source = readFileSync("src/features/exports/TimesheetPrintView.jsx", "utf8");
 
 assert.match(source, /Date/);
-assert.match(source, /Company/);
-assert.match(source, /Rig Name\/Number/);
-assert.match(source, /Field Ticket Number/);
-assert.match(source, /Day Rate/);
+assert.match(source, /Client \/ Company/);
+assert.match(source, /Site \/ Location/);
+assert.match(source, /Reference Number/);
+assert.match(source, /Base Pay/);
 assert.match(source, /Hours Worked/);
-assert.match(source, /Transportation/);
+assert.match(source, /Travel Reimbursement/);
 assert.match(source, /Total/);
 
 assert.match(source, /Mileage Details/);

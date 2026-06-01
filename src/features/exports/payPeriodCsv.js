@@ -16,12 +16,12 @@ export function buildPayPeriodCsv(payPeriod) {
     [],
     [
       "Date",
-      "Company",
-      "Rig Name/Number",
-      "Field Ticket Number",
-      "Day Rate",
+      "Client / Company",
+      "Site / Location",
+      "Reference Number",
+      "Base Pay",
       "Hours Worked",
-      "Transportation",
+      "Travel Reimbursement",
       "Total",
     ],
   ];
@@ -32,11 +32,11 @@ export function buildPayPeriodCsv(payPeriod) {
     rows.push([
       job.date || "",
       job.company || "",
-      job.rigNameOrNumber || "",
-      job.fieldTicketNumber || "",
+      getSiteLocation(job),
+      getReferenceNumber(job),
       job.baseJobPay ?? "",
       getHoursWorkedForTimesheet(job),
-      job.transportation ?? "",
+      getTravelReimbursement(job),
       job.totalPay ?? 0,
     ]);
   });
@@ -53,6 +53,18 @@ export function getHoursWorkedForTimesheet(job) {
   }
 
   return job?.hoursWorked ?? 0;
+}
+
+export function getSiteLocation(job) {
+  return job?.siteLocation || job?.rigNameOrNumber || "";
+}
+
+export function getReferenceNumber(job) {
+  return job?.referenceNumber || job?.fieldTicketNumber || "";
+}
+
+export function getTravelReimbursement(job) {
+  return job?.travelReimbursement ?? job?.transportation ?? "";
 }
 
 export function calculateGrandTotal(jobs) {

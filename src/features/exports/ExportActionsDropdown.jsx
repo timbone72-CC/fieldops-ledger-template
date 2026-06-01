@@ -40,14 +40,14 @@ export default function ExportActionsDropdown({ onShowTimesheet, onDataChanged }
         <ImportPayPeriodJsonButton onImportComplete={onDataChanged} />
 
         <p className="helper">
-          <strong>Timesheet / Reports</strong>
+          <strong>Work Reports</strong>
         </p>
         <DownloadPayPeriodCsvButton />
         <SendPayPeriodCsvToTrustedSheetButton />
         <PrintPayPeriodReportButton />
 
         <button type="button" onClick={handlePrintTimesheet}>
-          Print Timesheet
+          Print Work Report
         </button>
 
         <p className="helper">

@@ -1,5 +1,11 @@
 import { loadActivePayPeriod } from "../pay-periods/activePayPeriodStorage.js";
 import { calculateMileageSummary } from "../../shared/utils/calculateMileageSummary.js";
+import {
+  getHoursWorkedForTimesheet,
+  getReferenceNumber,
+  getSiteLocation,
+  getTravelReimbursement,
+} from "./payPeriodCsv.js";
 
 export default function TimesheetPrintView() {
   const payPeriod = loadActivePayPeriod();
@@ -10,18 +16,18 @@ export default function TimesheetPrintView() {
 
   return (
     <section className="timesheet-print-view">
-      <h2>Pay Period Report</h2>
+      <h2>Work Report</h2>
 
       <table className="timesheet-print-table">
         <thead>
           <tr>
             <th>Date</th>
-            <th>Company</th>
-            <th>Rig Name/Number</th>
-            <th>Field Ticket Number</th>
-            <th>Day Rate</th>
+            <th>Client / Company</th>
+            <th>Site / Location</th>
+            <th>Reference Number</th>
+            <th>Base Pay</th>
             <th>Hours Worked</th>
-            <th>Transportation</th>
+            <th>Travel Reimbursement</th>
             <th>Total</th>
           </tr>
         </thead>
@@ -36,11 +42,11 @@ export default function TimesheetPrintView() {
               <tr key={job.id}>
                 <td>{job.date || ""}</td>
                 <td>{job.company || ""}</td>
-                <td>{job.rigNameOrNumber || ""}</td>
-                <td>{job.fieldTicketNumber || ""}</td>
+                <td>{getSiteLocation(job)}</td>
+                <td>{getReferenceNumber(job)}</td>
                 <td>{job.baseJobPay || ""}</td>
                 <td>{getHoursWorkedForTimesheet(job)}</td>
-                <td>{job.transportation || ""}</td>
+                <td>{getTravelReimbursement(job)}</td>
                 <td>{job.totalPay || 0}</td>
               </tr>
             ))
@@ -104,12 +110,4 @@ export default function TimesheetPrintView() {
       </section>
     </section>
   );
-}
-
-function getHoursWorkedForTimesheet(job) {
-  if (job?.jobType === "torque_turn") {
-    return job.additionalHours || 0;
-  }
-
-  return job?.hoursWorked || 0;
 }

@@ -7,6 +7,19 @@ const payPeriod = {
   endDate: "2026-05-15",
   jobs: [
     {
+      jobType: "hourly_work",
+      date: "2026-05-01",
+      company: "Example Inspection Group",
+      siteLocation: "Inspection Route 3",
+      rigNameOrNumber: "Legacy Rig Should Not Export",
+      referenceNumber: "WO-300",
+      fieldTicketNumber: "Legacy Ticket Should Not Export",
+      hoursWorked: 7.5,
+      travelReimbursement: 18,
+      transportation: 99,
+      totalPay: 240,
+    },
+    {
       jobType: "bucking",
       date: "2026-05-02",
       company: "Demo Client",
@@ -43,13 +56,25 @@ const rows = csv.split("\n").map((row) => row.split(","));
 const headerRow = rows.find((row) => row[0] === "Date");
 assert.deepEqual(headerRow, [
   "Date",
-  "Company",
-  "Rig Name/Number",
-  "Field Ticket Number",
-  "Day Rate",
+  "Client / Company",
+  "Site / Location",
+  "Reference Number",
+  "Base Pay",
   "Hours Worked",
-  "Transportation",
+  "Travel Reimbursement",
   "Total",
+]);
+
+const hourlyWorkRow = rows.find((row) => row[3] === "WO-300");
+assert.deepEqual(hourlyWorkRow, [
+  "2026-05-01",
+  "Example Inspection Group",
+  "Inspection Route 3",
+  "WO-300",
+  "",
+  "7.5",
+  "18",
+  "240",
 ]);
 
 const buckingRow = rows.find((row) => row[3] === "FT-100");
@@ -77,7 +102,7 @@ assert.deepEqual(torqueTurnRow, [
 ]);
 
 const grandTotalRow = rows.find((row) => row[0] === "Grand Total");
-assert.deepEqual(grandTotalRow, ["Grand Total", "", "", "", "", "", "", "1764"]);
+assert.deepEqual(grandTotalRow, ["Grand Total", "", "", "", "", "", "", "2004"]);
 
 assert.doesNotMatch(csv, /mileageEntries/);
 assert.doesNotMatch(csv, /mileageRateSnapshot/);
