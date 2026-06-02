@@ -2,15 +2,18 @@
 
 ## 1. Current Head
 
-ae1f02d Bump FieldOps PWA cache for icon refresh
+23c2238 Deploy generic FieldOps work record build
 
 ## 2. Recent Commits
 
-- ae1f02d Bump FieldOps PWA cache for icon refresh
-- 5db0651 Polish FieldOps PWA icon
-- a3f6837 Fix FieldOps Pages PWA paths
-- ff31a17 Update checkpoint after trusted user doc rename
-- 29bc954 Rename trusted user FieldOps docs
+- 23c2238 Deploy generic FieldOps work record build
+- 6443e25 Polish generic work record wording
+- 3d2a02a Preserve generic and legacy stored work records
+- aedcd38 Support generic work backup validation
+- 1c58f14 Generalize work report exports
+- 62b3795 Switch new records to generic work form
+- 56a2057 Add generic hourly work pay type
+- 8f2008a Update checkpoint after FieldOps PWA icon fix
 
 ## 3. Repo State
 
@@ -18,9 +21,9 @@ ae1f02d Bump FieldOps PWA cache for icon refresh
 - Branch: `main`
 - Remote: `origin` is configured for the public template repo.
 - Pushed to `origin/main`
-- Captured safe repo state: `ae1f02d Bump FieldOps PWA cache for icon refresh`
+- Captured safe repo state: `23c2238 Deploy generic FieldOps work record build`
 - This checkpoint documents the latest pushed clean state before the checkpoint edit itself; its own future commit is intentionally not self-referenced.
-- FieldOps Pages PWA paths, live install behavior, and public PWA icon refresh are now validated.
+- FieldOps Pages PWA paths, live install behavior, public PWA icon refresh, and generic work-record build are now validated.
 - Blockers: none known.
 
 ## 4. Project Purpose
@@ -86,15 +89,30 @@ Do not add yet:
 - Renamed `FIELDOPS_LEDGER_TRUSTED_USER_RELEASE_READINESS.md`.
 - Updated trusted-user public docs cross-links and visible FieldOps Ledger wording.
 
+### 6.6 Generic Work Record Migration
+
+- Added generic `hourly_work` pay support while preserving legacy `bucking` and `torque_turn` identifiers.
+- New records now use a neutral work-record form.
+- Legacy bucking and torque-turn records remain readable, editable, calculable, exportable, and importable.
+- CSV and print output now use neutral Work Report wording with legacy field fallbacks.
+- Backup validation accepts generic, legacy, and mixed record sets.
+- Active pay-period storage preserves generic and legacy work records without silently discarding either format.
+- Visible app wording was polished for generic FieldOps work records.
+- Production `/docs` build was deployed and the stale Vite JS asset was removed.
+
 ## 7. Confirmed Checks
 
 Latest confirmed checks before this checkpoint edit:
 
+- `node src/features/pay-periods/activePayPeriodStorage.test.mjs` passed
+- `node src/features/exports/validatePayPeriodBackup.test.mjs` passed
 - `node src/features/exports/jsonBackupRoundTrip.test.mjs` passed
-- `node src/features/exports/sendPayPeriodCsvToTrustedSheet.test.mjs` passed
+- `node src/features/exports/payPeriodCsvExport.test.mjs` passed
+- `node src/features/exports/timesheetPrintView.test.mjs` passed
+- `node src/shared/utils/calculateJobPay.test.mjs` passed
 - `npm run build` passed
 - stale Vite JS asset was removed
-- committed cleanly through `fdd9e1e`
+- committed and pushed cleanly through `23c2238`
 
 ## 8. Remaining Deferred Matches
 
@@ -115,15 +133,18 @@ Reason:
 
 ## 9. Next Safe Step
 
-Commit this checkpoint update.
+Recommended next safe step:
 
-Recommended verification before commit:
+- live browser validation of the deployed generic FieldOps work-record build
+- no new feature work until the live app is checked
+- if live validation passes, stop or create a small public-polish findings list only
 
-- `git diff --check`
-- `git diff --stat`
-- `git status --short`
+Before any next code change, run:
 
-## 7. Live GitHub Pages Validation
+- `git status --branch --short`
+- `git log --oneline -8`
+
+## 10. Live GitHub Pages Validation
 
 - Live GitHub Pages demo confirmed working for the published template repo.
 - GitHub Pages source is `main` branch and `/docs` folder.
