@@ -48,10 +48,10 @@ export default function App() {
     <main className="app-shell">
       <section className="hero-card">
         <p className="eyebrow">FieldOps Ledger</p>
-        <h1>1099 field ticket, receipt, and pay-period tracker</h1>
+        <h1>Offline-first work record and pay-period tracker</h1>
         <p className="subtext">
-          Capture job tickets and receipts, review the details, calculate pay,
-          subtract expenses, and export a clean pay-period report.
+          Capture work records and receipts, review the details, calculate pay,
+          track expenses, and export a clean pay-period report.
         </p>
       </section>
 

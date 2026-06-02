@@ -49,7 +49,7 @@ export default function SavedJobsList({ onJobDeleted }) {
   }
 
   function deleteJob(jobId) {
-    const confirmed = window.confirm("Delete this saved job?");
+    const confirmed = window.confirm("Delete this saved work record?");
 
     if (!confirmed) {
       return;
@@ -75,10 +75,10 @@ export default function SavedJobsList({ onJobDeleted }) {
 
   return (
     <section className="panel">
-      <h2>Saved Jobs</h2>
+      <h2>Saved Work Records</h2>
 
       {jobs.length === 0 ? (
-        <p className="helper">No jobs saved yet.</p>
+        <p className="helper">No work records saved yet.</p>
       ) : (
         <div className="list saved-jobs-list">
           {jobs.map((job) => (
@@ -136,18 +136,30 @@ export default function SavedJobsList({ onJobDeleted }) {
 }
 
 function formatJobLabel(job) {
-  if (job.jobType === "torque_turn") {
+  const workType = job.workType || job.jobType;
+
+  if (workType === "hourly_work") {
+    const siteLocation = job.siteLocation || "Location not set";
+    return `Hourly Work — ${siteLocation} — ${Number(job.hoursWorked || 0)} hrs`;
+  }
+
+  if (workType === "torque_turn") {
     return `Torque Turn — ${Number(job.additionalHours || 0)} additional hrs`;
   }
 
-  const buckingState = job.buckingState || "State not set";
-  const jobsCompleted = Number(job.jobsCompleted || 0);
-  const hoursPerJob = Number(job.hoursPerJob || 0);
   const hoursWorked = Number(job.hoursWorked || 0);
 
-  if (jobsCompleted > 0 && hoursPerJob > 0) {
-    return `Bucking — ${buckingState} — ${jobsCompleted} job${jobsCompleted === 1 ? "" : "s"} × ${hoursPerJob} hrs = ${hoursWorked} hrs`;
+  if (workType === "bucking") {
+    const buckingState = job.buckingState || "State not set";
+    const jobsCompleted = Number(job.jobsCompleted || 0);
+    const hoursPerJob = Number(job.hoursPerJob || 0);
+
+    if (jobsCompleted > 0 && hoursPerJob > 0) {
+      return `Bucking — ${buckingState} — ${jobsCompleted} job${jobsCompleted === 1 ? "" : "s"} × ${hoursPerJob} hrs = ${hoursWorked} hrs`;
+    }
+
+    return `Bucking — ${hoursWorked} hrs`;
   }
 
-  return `Bucking — ${hoursWorked} hrs`;
+  return `Work Record — ${hoursWorked} hrs`;
 }

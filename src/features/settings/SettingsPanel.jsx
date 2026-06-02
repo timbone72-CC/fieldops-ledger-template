@@ -98,7 +98,7 @@ export default function SettingsPanel() {
       </label>
 
       <label className="field">
-        State Tax Rate % (Oklahoma default)
+        State Tax Rate %
         <input
           type="number"
           min="0"
