@@ -67,7 +67,7 @@ function normalizePayPeriod(payPeriod) {
           typeof job === "object" &&
           typeof job.id === "string" &&
           typeof job.payPeriodId === "string" &&
-          typeof job.jobType === "string" &&
+          typeof (job.workType || job.jobType) === "string" &&
           typeof job.totalPay === "number"
         );
       })
@@ -111,4 +111,3 @@ function normalizePayPeriod(payPeriod) {
     mileageEntries: safeMileage,
   };
 }
-
